@@ -1,0 +1,90 @@
+
+  <div class="container mt-5">
+    <div class="row custom-wrapper">
+       <form [formGroup]="registrationForm" >
+        <div>
+          <div class="mb-3 row">
+            <div class="col-sm-2">
+             </div>
+            <div class="col-sm-4">
+            </div>
+          </div>
+          <div class="input-group mb-3 row">
+          <div class="col-sm-2">
+            <span class="input-group-text">Name</span>
+          </div>
+          <div class="col-sm-4">
+            <input type="text" formControlName="Name" aria-label="Name" 
+            [ngClass]="{ 'is-invalid': submitted && f['Name'].errors }" class="form-control">
+            <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback">
+              <div *ngIf="f['Name'].errors">Name is required</div>
+            </div>
+          </div> 
+        </div>
+      
+        <div class="input-group mb-3 row">
+          <div class="col-sm-2">
+            <span class="input-group-text">Date of Birth</span>
+          </div>
+          <div class="col-sm-4">
+            <input type="date"  [ngClass]="{ 'is-invalid': submitted && f['DateofBirth'].errors }"
+             [(ngModel)]="age" (change)="calculateAge()"   formControlName="DateofBirth" 
+             aria-label="Date of Birth" class="form-control">
+             <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback">
+              <div *ngIf="f['Name'].errors">Date is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3 row">
+          <div class="col-sm-2">
+            <span class="input-group-text">Age</span>
+          </div>
+          <div class="col-sm-4">
+           {{showAge}}
+            <!-- <input  type="number"  formControlName="Age" aria-label="Age" class="form-control"> -->
+          </div>
+        </div>
+        
+        <div class="input-group mb-3 row">
+          <div class="col-sm-2">
+            <span class="input-group-text">Death – Sum Insured</span>
+          </div>
+          <div class="col-sm-4">
+            <input type="number" formControlName="SumInsured" aria-label="Death – Sum Insured"
+            [ngClass]="{ 'is-invalid': submitted && f['SumInsured'].errors }" class="form-control">
+            <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback">
+              <div *ngIf="f['Name'].errors">Death – Sum Insured is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3 row">
+          <div class="col-sm-2">
+            <span class="input-group-text">Occupation</span>
+          </div>
+          <div class="col-sm-4">
+             
+          <select
+          class="form-select"
+          (change)="changeOccupation($event)"
+          formControlName="OccupationType"  >
+          <option value="" selected>Choose Occupation</option> 
+          <option *ngFor="let item of Occupations | keyvalue" [value]="item.value" >{{item.key}}</option>
+          
+        </select>
+           
+          </div>
+        </div>
+         
+        <div class="input-group mb-3 row">
+          <div class="col-sm-2">
+            <span class="input-group-text">Death Premium </span>
+          </div>
+          <div class="col-sm-4">
+            {{deathPremium | number: '1.0-0'}}          
+          </div>
+        </div>
+        </div> 
+        
+      </form>
+    </div>
+  </div>
